@@ -52,15 +52,11 @@ namespace IP_NZ
             rMin = 5;
             //First row of IP renewal data
 
-            //rMax = oWS.UsedRange.Rows.Count;
-            //for (i = rMin; i <= rMax; i++)
-            //{
-            //    oWS.Rows.Delete(i);
-            //}
-            rMax = oWS.Range("A" + oWS.Rows.Count).End(-4162).Row;
-            Last row of IP renewal data
-            if (rMax >= 5)
-                oWS.Range(oWS.Rows(rMin), oWS.Rows(rMax)).Delete();
+            rMax = oWS.UsedRange.Rows.Count;
+            for (i = rMin; i <= rMax; i++)
+            {
+                oWS.Rows.Delete(i);
+            }
 
         }
     }
