@@ -1,0 +1,131 @@
+﻿using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Microsoft.VisualBasic;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
+using System.Net.Mail;
+
+namespace IP_NZ
+{
+
+public static class modGlobalvars
+{
+	public static string G_connection = string.Empty;
+	public static  G_cnn;
+	public static string G_user = string.Empty;
+	public static string G_pwd = string.Empty;
+	public static string G_system = string.Empty;
+	public static string G_library = string.Empty;
+	public static string G_ExcelPath = string.Empty;
+	public static string G_ctry = string.Empty;
+	public static string G_LOADate = string.Empty;
+}
+
+    public partial class frmLogin : Form
+    {
+        public frmLogin()
+        {
+            InitializeComponent();
+        }
+    }
+}
+
+
+public static class modGlobalvars
+{
+	public static string G_connection = string.Empty;
+	public static  G_cnn;
+	public static string G_user = string.Empty;
+	public static string G_pwd = string.Empty;
+	public static string G_system = string.Empty;
+	public static string G_library = string.Empty;
+	public static string G_ExcelPath = string.Empty;
+	public static string G_ctry = string.Empty;
+	public static string G_LOADate = string.Empty;
+}
+public class frmLogin
+{
+
+
+	private void OK_Click(System.Object sender, System.EventArgs e)
+	{
+		if (UserNamePassword()) {
+			modGlobalvars.G_user = UsernameTextBox.Text;
+			modGlobalvars.G_pwd = PasswordTextBox.Text;
+			this.Visible = false;
+			this.ShowInTaskbar = false;
+			frmMain frm = new frmMain();
+			frm.Show();
+		}
+	}
+
+	private void Cancel_Click(System.Object sender, System.EventArgs e)
+	{
+		this.Close();
+	}
+	private bool UserNamePassword()
+	{
+
+		if (string.IsNullOrEmpty(UsernameTextBox.Text)) {
+			Interaction.MsgBox("User must not be blank", MsgBoxStyle.Critical, "User Error");
+			return false;
+		}
+
+		if (string.IsNullOrEmpty(PasswordTextBox.Text)) {
+			Interaction.MsgBox("Password must not be blank", MsgBoxStyle.Critical, "Password Error");
+			return false;
+		}
+		modGlobalvars.G_connection = "Driver={Client Access ODBC Driver (32-bit)};" + "System=" + Strings.Trim(modGlobalvars.G_system) + ";" + "TRANSLATE=1;" + "Uid=" + Strings.Trim(UsernameTextBox.Text) + ";" + "Pwd=" + Strings.Trim(PasswordTextBox.Text);
+		if (!connServer(modGlobalvars.G_connection)) {
+			return false;
+		}
+		return true;
+	}
+	protected object connServer(string strConn)
+	{
+
+		modGlobalvars.G_cnn = new Odbc.OdbcConnection(strConn);
+		Cursor.Current = Cursors.WaitCursor;
+		try {
+			modGlobalvars.G_cnn.Open();
+			// will generate an error
+
+		} catch (Exception ex) {
+			Cursor.Current = Cursors.Default;
+			Interaction.MsgBox(Strings.Mid(ex.Message, 1, Strings.InStr(ex.Message, Constants.vbCrLf)), MsgBoxStyle.Critical, "Error Message");
+			modGlobalvars.G_cnn.Close();
+			modGlobalvars.G_cnn.Dispose();
+			return false;
+		}
+		Cursor.Current = Cursors.Default;
+		return true;
+
+	}
+
+	private void frmLogin_Load(object sender, System.EventArgs e)
+	{
+		modGlobalvars.G_system = My.Application.CommandLineArgs(0);
+		modGlobalvars.G_library = My.Application.CommandLineArgs(1);
+		modGlobalvars.G_ExcelPath = My.Application.CommandLineArgs(2);
+		modGlobalvars.G_ctry = My.Application.CommandLineArgs(3);
+	}
+	public frmLogin()
+	{
+		Load += frmLogin_Load;
+	}
+}
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+//=======================================================
