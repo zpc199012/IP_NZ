@@ -80,8 +80,8 @@ namespace IP_NZ
                 objProc.Start();
 
                 //Test Form Start
-                frmService Service = new frmService();
-                Service.Show();
+                //frmService Service = new frmService();
+                //Service.Show();
                 //Test End
 
                 //objProc.Close();
@@ -117,9 +117,9 @@ namespace IP_NZ
             System.Data.Odbc.OdbcCommand objQuery = new System.Data.Odbc.OdbcCommand("select patno,rentyp,loadat,rensts,postdat from " + modGlobalvars.G_library.Trim() + ".APFRENEW WHERE CTRY = '" + modGlobalvars.G_ctry + "' AND LOADAT = '" + Strings.Trim(yyyymmdd) + "'", modGlobalvars.G_cnn);
             System.Data.Odbc.OdbcDataReader odbcReader = objQuery.ExecuteReader();
 
-            Microsoft.Office.Interop.Excel.Application oXL = new Microsoft.Office.Interop.Excel.Application();
-            Microsoft.Office.Interop.Excel.Workbook oWBK = null;
-            Microsoft.Office.Interop.Excel._Worksheet oWS = null;
+            //Microsoft.Office.Interop.Excel.Application oXL = new Microsoft.Office.Interop.Excel.Application();
+            //Microsoft.Office.Interop.Excel.Workbook oWBK = null;
+            //Microsoft.Office.Interop.Excel._Worksheet oWS = null;
 
             //Modified
             //Microsoft.Office.Interop.Range 
@@ -133,25 +133,25 @@ namespace IP_NZ
             string strRENTYP = string.Empty;
             string pattern = "(NZ?)";
             // Get our Excel process ID
-            GetWindowThreadProcessId(oXL.Hwnd, ref processId);
+            GetWindowThreadProcessId(modGlobalvars.oXL.Hwnd, ref processId);
             Process excelProcess = Process.GetProcessById(processId.ToInt32());
 
             try
             {
-                oWBK = oXL.Workbooks.Open(FullFileName);
-                oWS = oXL.Worksheets["Renewals"];
-                oWS.Activate();
-                if (!string.IsNullOrEmpty(Strings.Trim(oXL.Cells[5, 1].value)))
+                modGlobalvars.oWBK = modGlobalvars.oXL.Workbooks.Open(FullFileName);
+                modGlobalvars.oWS = modGlobalvars.oXL.Worksheets["Renewals"];
+                modGlobalvars.oWS.Activate();
+                if (!string.IsNullOrEmpty(Strings.Trim(modGlobalvars.oXL.Cells[5, 1].value)))
                 {
-                    oXL.Run("ClearIPList");
+                    modGlobalvars.oXL.Run("ClearIPList");
                 }
                 dynamic intXLSDataCtr = 0;
                 int rowIndex = 1;
                 //                int colIndex = 1;
-                int rowLimit = oWS.UsedRange.Rows.Count;
-                int colLimit = oWS.UsedRange.Columns.Count;
+                int rowLimit = modGlobalvars.oWS.UsedRange.Rows.Count;
+                int colLimit = modGlobalvars.oWS.UsedRange.Columns.Count;
 
-                rowLimit = oXL.ActiveSheet.Cells(oXL.Rows.Count, "A").End(-4162).Row;
+                rowLimit = modGlobalvars.oXL.ActiveSheet.Cells(modGlobalvars.oXL.Rows.Count, "A").End(-4162).Row;
 
                 rowIndex = rowLimit + 1;
                 progressCtr = 0;
@@ -170,7 +170,7 @@ namespace IP_NZ
                     this.lblprogress1.Text = Conversion.Str(Math.Round((progressCtr / totalrows) * 100.0)) + "% Completed";
                     this.lblprogress1.Refresh();
 
-                    if (((Microsoft.Office.Interop.Excel.Range)oXL.Cells[rowIndex, 1]).Value2 == null)
+                    if (((Microsoft.Office.Interop.Excel.Range)modGlobalvars.oXL.Cells[rowIndex, 1]).Value2 == null)
                     {
                         switch (odbcReader.GetString(1))
                         {
@@ -184,13 +184,13 @@ namespace IP_NZ
                                 strRENTYP = "T";
                                 break;
                         }
-                        oXL.Cells[rowIndex, 1].value = strRENTYP;
+                        modGlobalvars.oXL.Cells[rowIndex, 1].value = strRENTYP;
                     }
 
-                    if (((Microsoft.Office.Interop.Excel.Range)oXL.Cells[rowIndex, 2]).Value2 == null)
+                    if (((Microsoft.Office.Interop.Excel.Range)modGlobalvars.oXL.Cells[rowIndex, 2]).Value2 == null)
                     {
                         //oXL.Cells(rowIndex, 2).value = odbcReader.GetString("0")
-                        oXL.Cells[rowIndex, 2].value = Regex.Replace(odbcReader.GetString(0), pattern, string.Empty);
+                        modGlobalvars.oXL.Cells[rowIndex, 2].value = Regex.Replace(odbcReader.GetString(0), pattern, string.Empty);
                     }
 
                     retRowCtr += 1;
@@ -205,17 +205,17 @@ namespace IP_NZ
             }
             finally
             {
-                oWBK.Save();
-                oWBK.Close();
-                oXL.Quit();
+                modGlobalvars.oWBK.Save();
+                modGlobalvars.oWBK.Close();
+                modGlobalvars.oXL.Quit();
                 objQuery.Dispose();
                 odbcReader.Close();
                 //Make sure that our Excel process is removed
                 excelProcess.Kill();
 
-                oXL = null;
-                oWBK = null;
-                oWS = null;
+                modGlobalvars.oXL = null;
+                modGlobalvars.oWBK = null;
+                modGlobalvars.oWS = null;
             }
 
             return retRowCtr;
@@ -263,7 +263,65 @@ namespace IP_NZ
             this.txtLOADate.CustomFormat = "MM/dd/yyyy";
         }
 
+        private void clearList_Click(object sender, EventArgs e)
+        {
+            System.Data.Odbc.OdbcCommand objQuery = new System.Data.Odbc.OdbcCommand("select patno,rentyp,loadat,rensts,postdat from " + modGlobalvars.G_library.Trim() + ".APFRENEW WHERE CTRY = '" + modGlobalvars.G_ctry + "' AND LOADAT = '" + Strings.Trim(yyyymmdd) + "'", modGlobalvars.G_cnn);
+            System.Data.Odbc.OdbcDataReader odbcReader = objQuery.ExecuteReader();
+
+            long i = 0;
+            //Microsoft.Office.Interop.Excel.Application oXL = new Microsoft.Office.Interop.Excel.Application();
+            //Microsoft.Office.Interop.Excel._Worksheet oWS = null;
+            long rMin = 0;
+            long rMax = 0;
+            //Range rngClear = default(Range);
+
+            try
+            {
+                modGlobalvars.oWS = modGlobalvars.oXL.Worksheets["Renewals"];
+                modGlobalvars.oWS.Activate();
+
+                //var _with1 = oXL.Worksheets["Renewals"];
+                rMin = 5;
+                //First row of IP renewal data
+
+                rMax = modGlobalvars.oWS.UsedRange.Rows.Count;
+                for (i = rMin; i <= rMax; i++)
+                {
+                    modGlobalvars.oWS.Rows.Delete(i);
+                }
+
+                //rMax = oWS.Range("A" + oWS.Rows.Count).End(-4162).Row;
+                //Last row of IP renewal data
+                //if (rMax >= 5)
+                //    oWS.Range(oWS.Rows(rMin), oWS.Rows(rMax)).Delete();
+
+            }
+
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+
+            }
+            finally
+            {
+                modGlobalvars.oWBK.Save();
+                modGlobalvars.oWBK.Close();
+                modGlobalvars.oXL.Quit();
+                objQuery.Dispose();
+                odbcReader.Close();
+                //Make sure that our Excel process is removed
+                //excelProcess.Kill();
+
+                modGlobalvars.oXL = null;
+                modGlobalvars.oWBK = null;
+                modGlobalvars.oWS = null;
+            }
+
+        }
 
 
+
+
+        public string yyyymmdd { get; set; }
     }
 }
