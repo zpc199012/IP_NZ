@@ -23,6 +23,22 @@ namespace IP_NZ
             //frmMain.ShowInTaskbar = true;
         }
 
+        //Modified Start 08092016
+        System.Globalization.CultureInfo oldCI;
+
+        void SetNewCurrentCulture()
+        {
+            oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+        }
+
+        void ResetCurrentCulture()
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+        }
+
+        //Modified End
+
         private void RenewalLabel_Click(object sender, EventArgs e)
         {
 
@@ -71,6 +87,13 @@ namespace IP_NZ
             {
                 Console.Write(ex.Message);
 
+            }
+
+            finally
+            {
+                //oWS.Close();
+                oXL.Quit();
+                ResetCurrentCulture();
             }
 
         }
