@@ -118,7 +118,7 @@
             this.clearList.TabIndex = 37;
             this.clearList.Text = "Clear List";
             this.clearList.UseVisualStyleBackColor = true;
-            this.clearList.Click += new System.EventHandler(this.clearList_Click);
+            //this.clearList.Click += new System.EventHandler(this.clearList_Click);
             // 
             // frmMain
             // 

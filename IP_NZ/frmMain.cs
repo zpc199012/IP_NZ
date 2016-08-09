@@ -80,8 +80,8 @@ namespace IP_NZ
                 objProc.Start();
 
                 //Test Form Start
-                //frmService Service = new frmService();
-                //Service.Show();
+                frmService Service = new frmService();
+                Service.Show();
                 //Test End
 
                 //objProc.Close();
@@ -263,61 +263,61 @@ namespace IP_NZ
             this.txtLOADate.CustomFormat = "MM/dd/yyyy";
         }
 
-        private void clearList_Click(object sender, EventArgs e)
-        {
-            System.Data.Odbc.OdbcCommand objQuery = new System.Data.Odbc.OdbcCommand("select patno,rentyp,loadat,rensts,postdat from " + modGlobalvars.G_library.Trim() + ".APFRENEW WHERE CTRY = '" + modGlobalvars.G_ctry + "' AND LOADAT = '" + Strings.Trim(yyyymmdd) + "'", modGlobalvars.G_cnn);
-            System.Data.Odbc.OdbcDataReader odbcReader = objQuery.ExecuteReader();
+        //private void clearList_Click(object sender, EventArgs e)
+        //{
+        //    System.Data.Odbc.OdbcCommand objQuery = new System.Data.Odbc.OdbcCommand("select patno,rentyp,loadat,rensts,postdat from " + modGlobalvars.G_library.Trim() + ".APFRENEW WHERE CTRY = '" + modGlobalvars.G_ctry + "' AND LOADAT = '" + Strings.Trim(yyyymmdd) + "'", modGlobalvars.G_cnn);
+        //    System.Data.Odbc.OdbcDataReader odbcReader = objQuery.ExecuteReader();
 
-            long i = 0;
-            //Microsoft.Office.Interop.Excel.Application oXL = new Microsoft.Office.Interop.Excel.Application();
-            //Microsoft.Office.Interop.Excel._Worksheet oWS = null;
-            long rMin = 0;
-            long rMax = 0;
-            //Range rngClear = default(Range);
+        //    long i = 0;
+        //    //Microsoft.Office.Interop.Excel.Application oXL = new Microsoft.Office.Interop.Excel.Application();
+        //    //Microsoft.Office.Interop.Excel._Worksheet oWS = null;
+        //    long rMin = 0;
+        //    long rMax = 0;
+        //    //Range rngClear = default(Range);
 
-            try
-            {
-                modGlobalvars.oWS = modGlobalvars.oXL.Worksheets["Renewals"];
-                modGlobalvars.oWS.Activate();
+        //    try
+        //    {
+        //        modGlobalvars.oWS = modGlobalvars.oXL.Worksheets["Renewals"];
+        //        modGlobalvars.oWS.Activate();
 
-                //var _with1 = oXL.Worksheets["Renewals"];
-                rMin = 5;
-                //First row of IP renewal data
+        //        //var _with1 = oXL.Worksheets["Renewals"];
+        //        rMin = 5;
+        //        //First row of IP renewal data
 
-                rMax = modGlobalvars.oWS.UsedRange.Rows.Count;
-                for (i = rMin; i <= rMax; i++)
-                {
-                    modGlobalvars.oWS.Rows.Delete(i);
-                }
+        //        rMax = modGlobalvars.oWS.UsedRange.Rows.Count;
+        //        for (i = rMin; i <= rMax; i++)
+        //        {
+        //            modGlobalvars.oWS.Rows.Delete(i);
+        //        }
 
-                //rMax = oWS.Range("A" + oWS.Rows.Count).End(-4162).Row;
-                //Last row of IP renewal data
-                //if (rMax >= 5)
-                //    oWS.Range(oWS.Rows(rMin), oWS.Rows(rMax)).Delete();
+        //        //rMax = oWS.Range("A" + oWS.Rows.Count).End(-4162).Row;
+        //        //Last row of IP renewal data
+        //        //if (rMax >= 5)
+        //        //    oWS.Range(oWS.Rows(rMin), oWS.Rows(rMax)).Delete();
 
-            }
+        //    }
 
-            catch (Exception ex)
-            {
-                Console.Write(ex.Message);
+        //    catch (Exception ex)
+        //    {
+        //        Console.Write(ex.Message);
 
-            }
-            finally
-            {
-                modGlobalvars.oWBK.Save();
-                modGlobalvars.oWBK.Close();
-                modGlobalvars.oXL.Quit();
-                objQuery.Dispose();
-                odbcReader.Close();
-                //Make sure that our Excel process is removed
-                //excelProcess.Kill();
+        //    }
+        //    finally
+        //    {
+        //        modGlobalvars.oWBK.Save();
+        //        modGlobalvars.oWBK.Close();
+        //        modGlobalvars.oXL.Quit();
+        //        objQuery.Dispose();
+        //        odbcReader.Close();
+        //        //Make sure that our Excel process is removed
+        //        //excelProcess.Kill();
 
-                modGlobalvars.oXL = null;
-                modGlobalvars.oWBK = null;
-                modGlobalvars.oWS = null;
-            }
+        //        modGlobalvars.oXL = null;
+        //        modGlobalvars.oWBK = null;
+        //        modGlobalvars.oWS = null;
+        //    }
 
-        }
+        //}
 
 
 
