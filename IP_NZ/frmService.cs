@@ -63,7 +63,7 @@ namespace IP_NZ
 
             try
             {
-                oWS = oXL.Worksheets["Renewals"];
+                oWS = oXL.Worksheets["Renewals"]; //oXL.Parent.Worksheets.Item["myXlSheet"];
                 oWS.Activate();
 
                 //var _with1 = oXL.Worksheets["Renewals"];
