@@ -1,13 +1,1 @@
 C:\Users\pzhao\AppData\Local\Temporary Projects\IP_NZ\bin\Debug\IP_NZ.exe.config
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\bin\Debug\IP_NZ.exe.config
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\bin\Debug\IP_NZ.exe
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\bin\Debug\IP_NZ.pdb
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\bin\Debug\CPi.Framework.dll
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.csprojResolveAssemblyReference.cache
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.frmLogin.resources
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.frmMain.resources
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.frmService.resources
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.Properties.Resources.resources
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.csproj.GenerateResource.Cache
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.exe
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.pdb
