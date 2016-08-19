@@ -93,6 +93,12 @@
     <Compile Include="Main.cs" />
     <Compile Include="modGlobalvars.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestClearList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestClearList.Designer.cs">
+      <DependentUpon>TestClearList.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +118,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TestClearList.resx">
+      <DependentUpon>TestClearList.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

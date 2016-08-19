@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
-//using Microsoft.Office.Interop.Excel.Worksheet;
 
 
 namespace IP_NZ
@@ -19,26 +18,24 @@ namespace IP_NZ
         public frmService()
         {
             InitializeComponent();
-            //objProc.Start();
-            //frmMain.Visible = true;
-            //frmMain.ShowInTaskbar = true;
+
         }
 
-        //Modified Start 08092016
-        System.Globalization.CultureInfo oldCI;
+        ////Modified Start 08092016
+        //System.Globalization.CultureInfo oldCI;
 
-        void SetNewCurrentCulture()
-        {
-            oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-        }
+        //void SetNewCurrentCulture()
+        //{
+        //    oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
+        //    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+        //}
 
-        void ResetCurrentCulture()
-        {
-            System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-        }
+        //void ResetCurrentCulture()
+        //{
+        //    System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
+        //}
 
-        //Modified End
+        ////Modified End
 
         private void RenewalLabel_Click(object sender, EventArgs e)
         {
@@ -57,10 +54,10 @@ namespace IP_NZ
         {
             long i = 0;
             //var oXL = new Microsoft.Office.Interop.Excel.Application();
-            Excel.Worksheet oWS = null;
+            //Excel.Worksheet oWS = null;
             long rMin = 0;
             long rMax = 0;
-            Range rngClear = default(Range);
+            //Range rngClear = default(Range);
 
 
             Excel.Application excelApp = new Excel.Application();
@@ -79,17 +76,18 @@ namespace IP_NZ
             // get some sheet
             string currentSheet = "Renewals";
             Excel.Worksheet excelWorksheet =
-                (Excel.Worksheet)excelSheets.get_Item(currentSheet);
+                    (Excel.Worksheet)excelSheets.get_Item(currentSheet);
 
             // access cell within sheet
             Excel.Range excelCell =
-                  (Excel.Range)excelWorksheet.get_Range("A5", "B25");
+                  (Excel.Range)excelWorksheet.get_Range("A5", "B37");
+            //Excel.Range entireRow = 
 
             
             try
             {
                 //oWS = oXL.Worksheets["Renewals"]; //oXL.Parent.Worksheets.Item["myXlSheet"];
-                excelWorksheet.Activate();
+                excelCell.Activate();
 
                 //var _with1 = oXL.Worksheets["Renewals"];
                 rMin = 5;
@@ -103,7 +101,7 @@ namespace IP_NZ
                     //cel.Delete();
 
                     //excelWorksheet.Range("A5", "B10");
-                    excelWorksheet.Rows.Delete(i);
+                    excelCell.Rows.Delete(i);
                 }
 
                 //rMax = oWS.Range("A" + oWS.Rows.Count).End(-4162).Row;
@@ -125,6 +123,11 @@ namespace IP_NZ
                 excelApp.Quit();
                 //ResetCurrentCulture();
             }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
 
         }
     }
