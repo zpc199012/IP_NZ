@@ -7,7 +7,6 @@ C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ
 C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.frmMain.resources
 C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.frmService.resources
 C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.Properties.Resources.resources
-C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.TestClearList.resources
 C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.csproj.GenerateResource.Cache
 C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.exe
 C:\Users\pzhao\Documents\Visual Studio 2013\Projects\IP_NZ\IP_NZ\obj\Debug\IP_NZ.pdb

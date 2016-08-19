@@ -15,115 +15,83 @@ namespace IP_NZ
 {
     public partial class frmService : Form
     {
+        private Excel.Application _app;
+        private Excel.Workbooks _books;
+        private Excel.Workbook _book;
+        protected Excel.Sheets _sheets;
+        protected Excel.Worksheet _sheet;
+
+
         public frmService()
         {
             InitializeComponent();
 
         }
 
-        ////Modified Start 08092016
-        //System.Globalization.CultureInfo oldCI;
-
-        //void SetNewCurrentCulture()
-        //{
-        //    oldCI = System.Threading.Thread.CurrentThread.CurrentCulture;
-        //    System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-        //}
-
-        //void ResetCurrentCulture()
-        //{
-        //    System.Threading.Thread.CurrentThread.CurrentCulture = oldCI;
-        //}
-
-        ////Modified End
-
         private void RenewalLabel_Click(object sender, EventArgs e)
         {
 
         }
 
-        //private void clearList_Click(object sender, EventArgs e)
-        //{
-        //    Microsoft.Office.Interop.Excel.Application oXL = new Microsoft.Office.Interop.Excel.Application();
-
-        //    var rng = oXL.Worksheets["Renewals"]; 
-        //    rng.Clear();
-        //}
-
         private void clearList_Click(object sender, EventArgs e)
         {
-            long i = 0;
+            long i;
             //var oXL = new Microsoft.Office.Interop.Excel.Application();
             //Excel.Worksheet oWS = null;
-            long rMin = 0;
-            long rMax = 0;
+            long rMin = 5;
+            long rMax;
             //Range rngClear = default(Range);
 
+            OpenExcelWorkbook(@modGlobalvars.G_ExcelPath);
+            _sheet = (Excel.Worksheet)_sheets[1];
+            _sheet.Select(Type.Missing);
+            rMax = _sheet.UsedRange.Rows.Count;
 
-            Excel.Application excelApp = new Excel.Application();
+            for (i = rMin; i <= rMax; i++)
+            {
+                Excel.Range range = _sheet.get_Range("A5", Type.Missing).EntireRow;
+                range.Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
+                NAR(range);
 
-            // if you want to make excel visible to user, set this property to true, false by default
-            excelApp.Visible = true;
+            }
 
-            // open an existing workbook
-            Excel.Workbook excelWorkbook = excelApp.Workbooks.Open(modGlobalvars.G_ExcelPath,
-                0, false, 5, "", "", false, Excel.XlPlatform.xlWindows, "",
-                true, false, 0, true, false, false);
+            NAR(_sheet);
+            CloseExcelWorkbook();
+            NAR(_book);
+            _app.Quit();
+            NAR(_app);
 
-            // get all sheets in workbook
-            Excel.Sheets excelSheets = excelWorkbook.Worksheets;
+        }
 
-            // get some sheet
-            string currentSheet = "Renewals";
-            Excel.Worksheet excelWorksheet =
-                    (Excel.Worksheet)excelSheets.get_Item(currentSheet);
+        protected void OpenExcelWorkbook(string fileName)
+        {
+            _app = new Excel.Application();
+            _app.Visible = true;
+            if (_book == null)
+            {
+                _books = _app.Workbooks;
+                _book = _books.Open(fileName, Type.Missing, false, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                _sheets = _book.Worksheets;
+            }
+        }
 
-            // access cell within sheet
-            Excel.Range excelCell =
-                  (Excel.Range)excelWorksheet.get_Range("A5", "B37");
-            //Excel.Range entireRow = 
+        protected void CloseExcelWorkbook()
+        {
+            _book.Save();
+            _book.Close(false, Type.Missing, Type.Missing);
+        }
 
-            
+        protected void NAR(object o)
+        {
             try
             {
-                //oWS = oXL.Worksheets["Renewals"]; //oXL.Parent.Worksheets.Item["myXlSheet"];
-                excelCell.Activate();
-
-                //var _with1 = oXL.Worksheets["Renewals"];
-                rMin = 5;
-                //First row of IP renewal data
-
-                rMax = excelWorksheet.UsedRange.Rows.Count;
-
-                for (i = rMin; i <= rMax; i++)
-                {
-                    //Excel.Range cel = excelWorksheet.Cells[6, 2];
-                    //cel.Delete();
-
-                    //excelWorksheet.Range("A5", "B10");
-                    excelCell.Rows.Delete(i);
-                }
-
-                //rMax = oWS.Range("A" + oWS.Rows.Count).End(-4162).Row;
-                //Last row of IP renewal data
-                //if (rMax >= 5)
-                //    oWS.Range(oWS.Rows(rMin), oWS.Rows(rMax)).Delete();
-
+                if (o != null)
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(o);
             }
-
-            catch (Exception ex)
-            {
-                Console.Write(ex.Message);
-
-            }
-
             finally
             {
-                //oWS.Close();
-                excelApp.Quit();
-                //ResetCurrentCulture();
+                o = null;
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -80,11 +80,11 @@ namespace IP_NZ
                 objProc.Start();
 
                 //Test Form Start
-                TestClearList ClearList = new TestClearList();
-                ClearList.Show();
+                //TestClearList ClearList = new TestClearList();
+                //ClearList.Show();
 
-                //frmService Service = new frmService();
-                //Service.Show();
+                frmService Service = new frmService();
+                Service.Show();
                 //Test End
 
                 //objProc.Close();
