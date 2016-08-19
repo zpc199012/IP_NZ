@@ -94,7 +94,7 @@ namespace IP_NZ
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void validateList_Click(object sender, EventArgs e)
         {
 
         }
