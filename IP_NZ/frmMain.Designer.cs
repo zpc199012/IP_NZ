@@ -36,6 +36,7 @@
             this.ProgressBar1 = new System.Windows.Forms.ProgressBar();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblprogress1 = new System.Windows.Forms.Label();
+            this.clearList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblLOADate
@@ -91,7 +92,7 @@
             // 
             // ProgressBar1
             // 
-            this.ProgressBar1.Location = new System.Drawing.Point(1, 285);
+            this.ProgressBar1.Location = new System.Drawing.Point(2, 448);
             this.ProgressBar1.Name = "ProgressBar1";
             this.ProgressBar1.Size = new System.Drawing.Size(490, 23);
             this.ProgressBar1.Step = 1;
@@ -103,17 +104,28 @@
             this.lblprogress1.AutoSize = true;
             this.lblprogress1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.lblprogress1.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lblprogress1.Location = new System.Drawing.Point(412, 262);
+            this.lblprogress1.Location = new System.Drawing.Point(334, 425);
             this.lblprogress1.Name = "lblprogress1";
             this.lblprogress1.Size = new System.Drawing.Size(0, 20);
             this.lblprogress1.TabIndex = 36;
             this.lblprogress1.Visible = false;
             // 
+            // clearList
+            // 
+            this.clearList.Location = new System.Drawing.Point(101, 246);
+            this.clearList.Name = "clearList";
+            this.clearList.Size = new System.Drawing.Size(128, 36);
+            this.clearList.TabIndex = 37;
+            this.clearList.Text = "Clear List";
+            this.clearList.UseVisualStyleBackColor = true;
+            //this.clearList.Click += new System.EventHandler(this.clearList_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 308);
+            this.ClientSize = new System.Drawing.Size(494, 473);
+            this.Controls.Add(this.clearList);
             this.Controls.Add(this.lblprogress1);
             this.Controls.Add(this.ProgressBar1);
             this.Controls.Add(this.CloseButton);
@@ -138,5 +150,6 @@
         internal System.Windows.Forms.ProgressBar ProgressBar1;
         internal System.Windows.Forms.ToolTip toolTip1;
         internal System.Windows.Forms.Label lblprogress1;
+        private System.Windows.Forms.Button clearList;
     }
 }

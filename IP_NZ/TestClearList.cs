@@ -1,5 +1,4 @@
-﻿using Microsoft.Office.Interop.Excel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +12,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace IP_NZ
 {
-    public partial class frmService : Form
+    public partial class TestClearList : Form
     {
         private Excel.Application _app;
         private Excel.Workbooks _books;
@@ -21,31 +20,20 @@ namespace IP_NZ
         protected Excel.Sheets _sheets;
         protected Excel.Worksheet _sheet;
 
-
-        public frmService()
+        public TestClearList()
         {
             InitializeComponent();
-
         }
 
-        private void RenewalLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void clearList_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             long i;
-            //var oXL = new Microsoft.Office.Interop.Excel.Application();
-            //Excel.Worksheet oWS = null;
             long rMin = 5;
-            long rMax;
-            //Range rngClear = default(Range);
-
+            long rMax = 38;
             OpenExcelWorkbook(@modGlobalvars.G_ExcelPath);
             _sheet = (Excel.Worksheet)_sheets[1];
             _sheet.Select(Type.Missing);
-            rMax = _sheet.UsedRange.Rows.Count;
+            //Excel.Range range = _sheet.get_Range("A1:A1", Type.Missing);
 
             for (i = rMin; i <= rMax; i++)
             {
@@ -74,13 +62,11 @@ namespace IP_NZ
                 _sheets = _book.Worksheets;
             }
         }
-
         protected void CloseExcelWorkbook()
         {
             _book.Save();
             _book.Close(false, Type.Missing, Type.Missing);
         }
-
         protected void NAR(object o)
         {
             try
@@ -94,9 +80,6 @@ namespace IP_NZ
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }
